@@ -1,7 +1,8 @@
-package sum;
+package sum.order;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-public class Order {
+public class Order implements Serializable {
     public enum State {
         PENDING, INCOMPLETE, COMPLETE, CANCELLED
     }

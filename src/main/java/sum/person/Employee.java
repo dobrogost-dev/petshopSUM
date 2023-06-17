@@ -1,4 +1,4 @@
-package sum;
+package sum.person;
 
 import java.math.BigDecimal;
 

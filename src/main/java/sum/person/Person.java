@@ -1,6 +1,8 @@
-package sum;
+package sum.person;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
     public int id;
     public String firstName;
     public String lastName;

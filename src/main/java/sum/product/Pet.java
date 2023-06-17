@@ -1,4 +1,4 @@
-package sum;
+package sum.product;
 
 public class Pet {
     public String gender;
