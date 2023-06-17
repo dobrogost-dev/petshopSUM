@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     public JPanel logoPanel;
     public JPanel buttonsPanel;
     public JPanel mainPanel;
-    public MainFrame(Application app, int x, int y) {
+    public MainFrame(Application app, int x, int y, Dimension dimension) {
         this.app = app;
         this.setLocation(x,y);
         logo = new JButton();
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
         logoPanel = new JPanel();
         buttonsPanel = new JPanel();
         mainPanel = new JPanel();
-
+        this.setSize(dimension);
         //Border
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         //Logo Button
@@ -41,18 +41,22 @@ public class MainFrame extends JFrame {
         logo.setOpaque(true);
         logo.setBorder(border);
         logo.setFont(new Font("Arial", Font.PLAIN, 44));
+        logo.addActionListener(e -> {
+            app.changeFrame(new OfferFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
         //Buttons
         cartButton.setPreferredSize(new Dimension(100,50));
         cartButton.setText("Koszyk");
         cartButton.addActionListener(e -> {
-            app.changeFrame(new CartFrame(app, this.getX(), this.getY()));
+            app.changeFrame(new CartFrame(app, this.getX(), this.getY(), this.getSize()));
             this.dispose();
         });
         cartButton.setBackground(Color.LIGHT_GRAY);
         cartButton.setBorder(border);
         loginButton.setText("Zaloguj");
         loginButton.addActionListener(e -> {
-            app.changeFrame(new LoginFrame(app, this.getX(), this.getY()));
+            app.changeFrame(new LoginFrame(app, this.getX(), this.getY(), this.getSize()));
             this.dispose();
         });
         loginButton.setPreferredSize(new Dimension(100,50));
@@ -60,7 +64,7 @@ public class MainFrame extends JFrame {
         loginButton.setBorder(border);
         registerButton.setText("Zarejestruj");
         registerButton.addActionListener(e -> {
-            app.changeFrame(new RegisterFrame(app, this.getX(), this.getY()));
+            app.changeFrame(new RegisterFrame(app, this.getX(), this.getY(), this.getSize()));
             this.dispose();
         });
         registerButton.setPreferredSize(new Dimension(100,50));
@@ -77,7 +81,8 @@ public class MainFrame extends JFrame {
         mainPanel.setBackground(Color.GREEN);
         mainPanel.setBorder(border);
         mainPanel.setPreferredSize(new Dimension(600,500));
-
+    }
+    public void initialize() {
         this.add(logoPanel, BorderLayout.NORTH);
         this.add(buttonsPanel, BorderLayout.EAST);
         this.add(mainPanel);
@@ -88,13 +93,12 @@ public class MainFrame extends JFrame {
 
         JLabel roles = new JLabel("Roles: " + app.currentUser.getRoles());
         logoPanel.add(roles, BorderLayout.WEST);
-        JLabel view = new JLabel("View: ");
+        JLabel view = new JLabel("View: " + this.view.toString());
         logoPanel.add(view, BorderLayout.WEST);
 
         this.setTitle("Zwierzetex");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
-        this.setSize(800,600);
         this.setVisible(true);
         ImageIcon icon = new ImageIcon("paw.png");
         this.setIconImage(icon.getImage());

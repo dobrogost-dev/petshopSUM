@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Account implements Serializable {
     public enum Role {
-        NONE, CLIENT, SERVICE, MANAGER, STORE
+        NONE, CLIENT, SERVICE, MANAGER, STOREKEEPER
     }
     public Person person;
     public String login;

@@ -1,4 +1,5 @@
 package sum.general;
+import frame.MainFrame;
 import sum.product.Product;
 
 import javax.swing.*;
@@ -9,6 +10,10 @@ public class Application {
     public Account currentUser;
     public JFrame currentFrame;
     public List<Product> cart;
+
+    public Application() {
+        database = new Database();
+    }
 
     public void changeFrame(JFrame newFrame) {
         currentFrame = newFrame;
