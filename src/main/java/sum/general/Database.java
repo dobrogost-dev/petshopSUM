@@ -22,10 +22,6 @@ public class Database implements Serializable {
     }
 
     public List<Product> getProducts() {
-        products.add(new FoodProduct(1, 10, new BigDecimal("899.99"), "Karma dla psa", "Niemcy",
-                new Species("Pies", "Owczarek Niemiecki"), "Wolowina"));
-        products.add(new FoodProduct(2, 5, new BigDecimal("1900.99"), "Karma dla kota", "Persja",
-                new Species("Kot", "Perski"), "Losos"));
         return products;
     }
 }

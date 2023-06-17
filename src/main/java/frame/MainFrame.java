@@ -1,6 +1,7 @@
 package frame;
 
 import sum.*;
+import sum.general.Account;
 import sum.general.Application;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
     public JButton cartButton;
     public JButton loginButton;
     public JButton registerButton;
+    public JButton storeButton;
     public JPanel logoPanel;
     public JPanel buttonsPanel;
     public JPanel mainPanel;
@@ -28,6 +30,7 @@ public class MainFrame extends JFrame {
         cartButton = new JButton();
         loginButton = new JButton();
         registerButton = new JButton();
+        storeButton = new JButton();
         logoPanel = new JPanel();
         buttonsPanel = new JPanel();
         mainPanel = new JPanel();
@@ -71,6 +74,15 @@ public class MainFrame extends JFrame {
         registerButton.setBackground(Color.LIGHT_GRAY);
         registerButton.setBorder(border);
 
+        storeButton.setText("Magazyn");
+        storeButton.addActionListener(e -> {
+            app.changeFrame(new StoreFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
+        storeButton.setPreferredSize(new Dimension(100,50));
+        storeButton.setBackground(Color.LIGHT_GRAY);
+        storeButton.setBorder(border);
+
         //Panele
         logoPanel.setBackground(Color.BLUE);
         logoPanel.setPreferredSize(new Dimension(800,100));
@@ -88,8 +100,14 @@ public class MainFrame extends JFrame {
         this.add(mainPanel);
         logoPanel.add(logo, BorderLayout.CENTER);
         buttonsPanel.add(cartButton);
-        buttonsPanel.add(loginButton);
-        buttonsPanel.add(registerButton);
+        if (app.currentUser.getRoles().contains(Account.Role.NONE)) {
+            buttonsPanel.add(loginButton);
+            buttonsPanel.add(registerButton);
+        }
+        if(app.currentUser.getRoles().contains(Account.Role.STOREKEEPER)) {
+        buttonsPanel.add(storeButton);
+        }
+
 
         JLabel roles = new JLabel("Roles: " + app.currentUser.getRoles());
         logoPanel.add(roles, BorderLayout.WEST);
