@@ -1,8 +1,10 @@
 package sum.general;
 import frame.MainFrame;
+import sum.order.Order;
 import sum.product.Product;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,4 +105,17 @@ public class Application {
         guest.addRole(Account.Role.NONE);
         currentUser = guest;
     }
+    public int generateUniqueOrderId() {
+        int id = 1;
+        int finalId = id;
+        while (database.orders.stream().anyMatch(e -> e.id == finalId)) {
+            id++;
+        }
+        return id;
+    }
+    public void createOrder(int clientId){
+            BigDecimal sum = new BigDecimal(0);
+            Order order = new Order(generateUniqueOrderId(), clientId, Order.State.INCOMPLETE, sum, cart);
+            database.orders.add(order);
+        }
 }

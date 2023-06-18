@@ -2,6 +2,9 @@ package sum;
 import frame.StoreFrame;
 import sum.general.Account;
 import sum.general.Application;
+import sum.order.Order;
+import sum.person.ManagerEmployee;
+import sum.person.Person;
 import sum.product.FoodProduct;
 import sum.product.Species;
 
@@ -12,7 +15,9 @@ public class Main {
     public static void main(String[] args) {
         Application app = new Application();
         Account guest = new Account(null, null,null);
-        Account manager = new Account(null, "admin","123");
+        ManagerEmployee managerEmployee = new ManagerEmployee(1, "Adrian", "Dobrogost",
+                23, "104921842", new BigDecimal(10000), true);
+        Account manager = new Account(managerEmployee, "admin","123");
         Account service = new Account(null, "service","123");
         Account store = new Account(null, "store","123");
         Account client = new Account(null, "client","123");
@@ -27,7 +32,7 @@ public class Main {
         app.database.addAccount(service);
         app.database.addAccount(store);
         app.database.addAccount(client);
-        app.setCurrentUser(guest);
+        app.setCurrentUser(manager);
         app.database.products.add(new FoodProduct(1, 10, new BigDecimal("899.99"), "Karma dla psa", "Niemcy",
                 new Species("Pies", "Owczarek Niemiecki"), "Wolowina"));
         app.database.products.add(new FoodProduct(2, 5, new BigDecimal("1900.99"), "Karma dla kota", "Persja",

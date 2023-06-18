@@ -33,7 +33,11 @@ public class CartFrame extends MainFrame {
             this.dispose();
         });
         submitButton = new JButton("Zloz zamowienie");
-
+        submitButton.addActionListener(e -> {
+            app.createOrder(app.currentUser.person.id);
+            app.changeFrame(new OfferFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
         // Ustawianie JScrollPane jako widoku dla JTable
         JScrollPane scrollPane = new JScrollPane(productTable);
 
