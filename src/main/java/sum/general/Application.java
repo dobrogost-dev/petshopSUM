@@ -83,4 +83,8 @@ public class Application {
         }
         return null;
     }
+
+    public void clearCart() {
+        cart = new ArrayList<>();
+    }
 }

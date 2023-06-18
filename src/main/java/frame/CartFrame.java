@@ -27,6 +27,11 @@ public class CartFrame extends MainFrame {
 
         // Dodanie przycisku "Dodaj" i "Usuń" na górze tabeli
         clearButton = new JButton("Oproznij");
+        clearButton.addActionListener(e -> {
+            app.clearCart();
+            app.changeFrame(new CartFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
         submitButton = new JButton("Zloz zamowienie");
 
         // Ustawianie JScrollPane jako widoku dla JTable
