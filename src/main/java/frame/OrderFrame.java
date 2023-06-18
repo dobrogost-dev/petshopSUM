@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderFrame extends MainFrame {
     private JTable orderTable;
@@ -44,7 +45,7 @@ public class OrderFrame extends MainFrame {
 
     class OrderTableModel extends AbstractTableModel {
         private List<Order> orders;
-        private String[] columnNames = {"ID", "ClientId", "State", "Sum"};
+        private String[] columnNames = {"ID", "ClientId", "State", "Sum", "Products"};
 
         public OrderTableModel(List<Order> orders) {
             this.orders = orders;
@@ -68,6 +69,9 @@ public class OrderFrame extends MainFrame {
                 case 1 -> order.getClientId();
                 case 2 -> order.getState().toString();
                 case 3 -> order.getSum();
+                case 4 -> order.getProducts().stream()
+                        .map(Product::toString)
+                        .collect(Collectors.joining(", "));
                 default -> null;
             };
         }
