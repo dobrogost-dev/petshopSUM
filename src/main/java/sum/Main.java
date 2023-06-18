@@ -33,10 +33,7 @@ public class Main {
         app.database.addAccount(store);
         app.database.addAccount(client);
         app.setCurrentUser(manager);
-        app.database.products.add(new FoodProduct(1, 10, new BigDecimal("899.99"), "Karma dla psa", "Niemcy",
-                new Species("Pies", "Owczarek Niemiecki"), "Wolowina"));
-        app.database.products.add(new FoodProduct(2, 5, new BigDecimal("1900.99"), "Karma dla kota", "Persja",
-                new Species("Kot", "Perski"), "Losos"));
+
         app.changeFrame(new StoreFrame(app, 300, 100, new Dimension(800,600)));
     }
 }

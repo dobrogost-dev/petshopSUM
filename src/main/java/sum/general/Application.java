@@ -4,6 +4,7 @@ import sum.order.Order;
 import sum.product.Product;
 
 import javax.swing.*;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +15,20 @@ public class Application {
     public Account currentUser;
     public JFrame currentFrame;
     public List<Product> cart;
-
+    String fileName = "database.ser";
     public Application() {
         database = new Database();
         cart = new ArrayList<>();
+
+        try (FileInputStream fileIn = new FileInputStream(fileName);
+             ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+
+            database = (Database) objectIn.readObject();
+
+            System.out.println("Obiekt Database został wczytany z pliku " + fileName);
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Wystąpił błąd podczas wczytywania obiektu Database: " + e.getMessage());
+        }
     }
     public Database getDatabase() {
         return database;
@@ -113,9 +124,22 @@ public class Application {
         }
         return id;
     }
-    public void createOrder(int clientId){
-            BigDecimal sum = new BigDecimal(0);
-            Order order = new Order(generateUniqueOrderId(), clientId, Order.State.INCOMPLETE, sum, cart);
-            database.orders.add(order);
+    public void createOrder(int clientId) {
+        BigDecimal sum = Product.sumAllProducts(cart);
+        Order order = new Order(generateUniqueOrderId(), clientId, Order.State.INCOMPLETE, sum, cart);
+        database.orders.add(order);
+        clearCart();
+        saveDatabase();
+    }
+    public void saveDatabase() {
+        try (FileOutputStream fileOut = new FileOutputStream(fileName);
+             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+
+            objectOut.writeObject(database);
+
+            System.out.println("Obiekt Database został zapisany do pliku " + fileName);
+        } catch (IOException e) {
+            System.out.println("Wystąpił błąd podczas zapisywania obiektu Database: " + e.getMessage());
+        }
         }
 }

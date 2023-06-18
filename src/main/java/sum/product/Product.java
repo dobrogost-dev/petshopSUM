@@ -2,6 +2,7 @@ package sum.product;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public abstract class Product implements Serializable {
     public int getId() {
@@ -75,4 +76,11 @@ public abstract class Product implements Serializable {
         this.amount += amount;
     }
     public abstract Product copy();
+    public static BigDecimal sumAllProducts(List<Product> products) {
+        BigDecimal sum = new BigDecimal(0);
+        for (Product product : products) {
+            sum = sum.add(product.getPrice().multiply(new BigDecimal(product.amount)));
+        }
+        return sum;
+    }
 }
