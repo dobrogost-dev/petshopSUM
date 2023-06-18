@@ -29,4 +29,8 @@ public class Database implements Serializable {
                 .filter(p -> p.id == id)
                 .findFirst().get();
     }
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
 }

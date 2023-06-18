@@ -20,6 +20,7 @@ public class MainFrame extends JFrame {
     public JButton loginButton;
     public JButton registerButton;
     public JButton storeButton;
+    public JButton logoutButton;
     public JPanel logoPanel;
     public JPanel buttonsPanel;
     public JPanel mainPanel;
@@ -30,6 +31,7 @@ public class MainFrame extends JFrame {
         logo = new JButton();
         cartButton = new JButton();
         loginButton = new JButton();
+        logoutButton = new JButton();
         registerButton = new JButton();
         storeButton = new JButton();
         logoPanel = new JPanel();
@@ -66,6 +68,16 @@ public class MainFrame extends JFrame {
         loginButton.setPreferredSize(new Dimension(100,50));
         loginButton.setBackground(Color.LIGHT_GRAY);
         loginButton.setBorder(border);
+
+        logoutButton.setText("Wyloguj");
+        logoutButton.addActionListener(e -> {
+            app.logout();
+            app.changeFrame(new OfferFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
+        logoutButton.setPreferredSize(new Dimension(100,50));
+        logoutButton.setBackground(Color.LIGHT_GRAY);
+        logoutButton.setBorder(border);
         registerButton.setText("Zarejestruj");
         registerButton.addActionListener(e -> {
             app.changeFrame(new RegisterFrame(app, this.getX(), this.getY(), this.getSize()));
@@ -104,6 +116,8 @@ public class MainFrame extends JFrame {
         if (app.currentUser.getRoles().contains(Account.Role.NONE)) {
             buttonsPanel.add(loginButton);
             buttonsPanel.add(registerButton);
+        } else {
+            buttonsPanel.add(logoutButton);
         }
         if(app.currentUser.getRoles().contains(Account.Role.STOREKEEPER)) {
         buttonsPanel.add(storeButton);

@@ -87,4 +87,20 @@ public class Application {
     public void clearCart() {
         cart = new ArrayList<>();
     }
+
+    public boolean login(String login, String password) {
+        for(Account account : database.accounts) {
+            if (account.login.equals(login)
+             && account.password.equals(password)) {
+                currentUser = account;
+                return true;
+            }
+        }
+        return false;
+    }
+    public void logout() {
+        Account guest = new Account(null, null,null);
+        guest.addRole(Account.Role.NONE);
+        currentUser = guest;
+    }
 }

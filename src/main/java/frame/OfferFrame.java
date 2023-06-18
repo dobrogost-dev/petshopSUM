@@ -24,8 +24,8 @@ public class OfferFrame extends MainFrame {
 
         // Ustawianie JTable z modelem
         productTable = new JTable(model);
-
-        addButton = new JButton("Dodaj");
+        addButton = new JButton("Dodaj do koszyka");
+        addButton.setPreferredSize(new Dimension(150,30));
         addButton.addActionListener(e -> {
             app.changeFrame(new AddProductClientFrame(app, this.getX(), this.getY(), this.getSize()));
             this.dispose();
