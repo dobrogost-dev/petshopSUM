@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
     public enum View {
-        MAIN, OFFER, CART, LOGIN, REGISTER, STORE
+        MAIN, OFFER, CART, LOGIN, REGISTER, STORE, ADD_PRODUCT_CLIENT, ADD_PRODUCT_STORE, SUMMARY, DISCOUNT
     }
     public Application app;
     public View view;
@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
     public JPanel logoPanel;
     public JPanel buttonsPanel;
     public JPanel mainPanel;
+    public Border border;
     public MainFrame(Application app, int x, int y, Dimension dimension) {
         this.app = app;
         this.setLocation(x,y);
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame {
         mainPanel = new JPanel();
         this.setSize(dimension);
         //Border
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        border = BorderFactory.createLineBorder(Color.BLACK);
         //Logo Button
         logo.setText("Zwierzetex");
         logo.setBackground(Color.CYAN);

@@ -22,7 +22,6 @@ public class StoreFrame extends MainFrame {
         this.view = View.STORE;
         List<Product> products = app.database.getProducts();
         ProductTableModel model = new ProductTableModel(products);
-
         // Ustawianie JTable z modelem
         productTable = new JTable(model);
 

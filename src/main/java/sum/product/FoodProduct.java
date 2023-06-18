@@ -9,4 +9,15 @@ public class FoodProduct extends Product {
         super(id, amount, price, name, country, species);
         this.composition = composition;
     }
+    public Product copy(){
+        return new FoodProduct(
+                this.id,
+                this.amount,
+                this.price,
+                this.name,
+                this.country,
+                this.species,
+                this.composition
+        );
+    }
 }

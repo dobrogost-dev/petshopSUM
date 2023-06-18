@@ -24,4 +24,9 @@ public class Database implements Serializable {
     public List<Product> getProducts() {
         return products;
     }
+    public Product getProductById(int id) {
+        return products.stream()
+                .filter(p -> p.id == id)
+                .findFirst().get();
+    }
 }

@@ -13,8 +13,11 @@ public class Species implements Serializable {
     public String getName() {
         return name;
     }
-
     public String getRace() {
         return race;
+    }
+    @Override
+    public String toString(){
+        return this.name + " "  + this.race;
     }
 }

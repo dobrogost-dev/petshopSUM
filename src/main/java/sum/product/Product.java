@@ -67,4 +67,12 @@ public abstract class Product implements Serializable {
         this.country = country;
         this.species = species;
     }
+    @Override
+    public String toString() {
+        return "id: " + this.id + " " + this.name + " " + this.species + " ilosc: " + this.amount;
+    }
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
+    public abstract Product copy();
 }

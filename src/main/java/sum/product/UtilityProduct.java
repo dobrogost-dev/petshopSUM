@@ -11,4 +11,15 @@ public class UtilityProduct extends Product {
         super(id, amount, price, name, country, species);
         this.brand = brand;
     }
+    public Product copy(){
+        return new UtilityProduct(
+                this.id,
+                this.amount,
+                this.price,
+                this.name,
+                this.country,
+                this.species,
+                this.brand
+        );
+    }
 }

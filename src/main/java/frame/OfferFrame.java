@@ -26,7 +26,10 @@ public class OfferFrame extends MainFrame {
         productTable = new JTable(model);
 
         addButton = new JButton("Dodaj");
-
+        addButton.addActionListener(e -> {
+            app.changeFrame(new AddProductClientFrame(app, this.getX(), this.getY(), this.getSize()));
+            this.dispose();
+        });
         // Ustawianie JScrollPane jako widoku dla JTable
         JScrollPane scrollPane = new JScrollPane(productTable);
 
